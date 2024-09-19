@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FarmApp</string>
+    <string name="retry">retry</string>
+    <string name="load_error">error\n</string>
+</resources>
