@@ -43,8 +43,8 @@ The application includes unit tests to ensure the functionality of critical comp
 ### Screenshots
 ```
 
-[Registration]: app/src/main/java/jayhymn.farmapp.ui.presentation.kt
-[HomeScreen]: app/src/main/java/androidx/compose/samples/crane/home/CraneHome.kt
+[Registration]: app/src/main/java/com/jayhymn/farmapp/ui/presentation/FarmRegistrationActivity.kt
+[HomeScreen]: app/src/main/java/com/jayhymn/farmapp/ui/presentation/FarmsActivity.kt
 [hilt]: https://d.android.com/hilt
 
 ### Installation
