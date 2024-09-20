@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FarmersActivity : AppCompatActivity() {
     private val viewModel by viewModels<FarmersViewModel>()
-    private lateinit var binding: ActivityFarmerBinding
+    lateinit var binding: ActivityFarmerBinding
     private lateinit var adapter: FarmerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +96,7 @@ class FarmersActivity : AppCompatActivity() {
 
 
 
-    private fun observeUiState() {
+    fun observeUiState() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
@@ -113,7 +113,7 @@ class FarmersActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleErrors(uiState: FarmersUiState) {
+    fun handleErrors(uiState: FarmersUiState) {
         if (uiState.errorMessages.isNotEmpty()) {
             val errorMessageText = resources.getString(uiState.errorMessages[0])
             val retryMessageText = resources.getString(R.string.retry)

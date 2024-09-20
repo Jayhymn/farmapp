@@ -2,18 +2,18 @@ package com.jayhymn.farmapp.ui.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.jayhymn.farmapp.data.repositories.FarmersRepository
-import com.jayhymn.farmapp.ui.state.FarmersUiState
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import java.io.IOException
 import androidx.lifecycle.viewModelScope
 import com.jayhymn.farmapp.R
-import com.jayhymn.farmapp.domain.FormatDateUseCase
+import com.jayhymn.farmapp.data.repositories.FarmersRepository
+import com.jayhymn.farmapp.ui.state.FarmersUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 
 
@@ -23,7 +23,7 @@ class FarmersViewModel @Inject constructor(
 //    private val formatDateUseCase: FormatDateUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(FarmersUiState())
-    val uiState = _uiState.asStateFlow()
+    val uiState: StateFlow<FarmersUiState> = _uiState.asStateFlow()
 
     private var fetchJob: Job? = null
 

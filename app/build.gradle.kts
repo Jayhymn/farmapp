@@ -49,24 +49,23 @@ dependencies {
 
     // for room database
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.junit.ktx)
+    testImplementation(libs.junit)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
     // for dagger hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    androidTestImplementation (libs.hilt.android.testing)
+    kaptAndroidTest (libs.hilt.compiler)
 
     implementation(libs.lottie)
 
     implementation(libs.androidx.core.splashscreen)
 
-    // For JUnit
-    testImplementation(libs.junit)
-
-// For Mockito
     testImplementation (libs.mockito.core)
-    testImplementation (libs.mockito.inline)
+    testImplementation (libs.androidx.core.testing)
 
 // For Coroutine testing
     testImplementation (libs.kotlinx.coroutines.test)
