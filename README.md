@@ -40,6 +40,13 @@ The application includes unit tests to ensure the functionality of critical comp
 - Kotlin SDK
 - Gradle
 
+### Screenshots
+```
+
+[Registration]: app/src/main/java/jayhymn.farmapp.ui.presentation.kt
+[HomeScreen]: app/src/main/java/androidx/compose/samples/crane/home/CraneHome.kt
+[hilt]: https://d.android.com/hilt
+
 ### Installation
 
 1. Clone the repository:
