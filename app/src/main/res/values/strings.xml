@@ -2,4 +2,11 @@
     <string name="app_name">FarmApp</string>
     <string name="retry">retry</string>
     <string name="load_error">error\n</string>
+    <string name="no_records_found">No records found</string>
+    <string name="register_farmer">Register Farmer</string>
+    <string name="registration_title">Register Farmer</string>
+    <string name="age_format">Age: %1$d</string>
+    <string name="gender_format">Gender: %1$s</string>
+    <string name="phone_format">Phone: %1$s</string>
+    <string name="crop_type_format">Crop Type: %1$s</string>
 </resources>

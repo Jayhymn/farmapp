@@ -46,12 +46,21 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
+
+    // for room database
     implementation(libs.androidx.room.runtime)
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    // for dagger hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+
+    implementation(libs.lottie)
+
+    implementation(libs.androidx.core.splashscreen)
+
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)

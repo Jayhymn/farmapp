@@ -18,6 +18,12 @@ data class FarmerEntity(
     @ColumnInfo(name = "crop_type")
     val cropType: String?,
 
+    @ColumnInfo(name = "gender")
+    val gender: String?,
+
+    @ColumnInfo(name = "phone_number")
+    val phoneNumber: String?,
+
     @ColumnInfo(name = "created_at")
     val createdAt: String = DateUtils.getCurrentTimestamp(),
 
@@ -29,7 +35,9 @@ data class FarmerEntity(
             id = this.uid,
             firstName = this.firstName ?: "",
             lastName = this.lastName ?: "",
-            cropType = this.cropType ?: ""
+            cropType = this.cropType ?: "",
+            gender = this.gender ?: "",
+            phoneNumber = this.phoneNumber ?: "",
         )
     }
 }
