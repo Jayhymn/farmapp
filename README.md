@@ -40,15 +40,15 @@ The application includes unit tests to ensure the functionality of critical comp
 - Kotlin SDK
 - Gradle
 
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jayhymn/farmapp.git
+
 ### Screenshots
 ```
 
 [Registration]: app/src/main/java/com/jayhymn/farmapp/ui/presentation/FarmRegistrationActivity.kt
 [HomeScreen]: app/src/main/java/com/jayhymn/farmapp/ui/presentation/FarmsActivity.kt
 [hilt]: https://d.android.com/hilt
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/jayhymn/farmapp.git
