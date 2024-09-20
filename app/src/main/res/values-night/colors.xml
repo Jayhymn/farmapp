@@ -4,7 +4,7 @@
     <color name="primaryLight">#1B5E20</color>
     <color name="primary">#4CAF50</color>
     <color name="primaryVariant">#388E3C</color>
-    <color name="secondary">#FFEB3B</color>
+    <color name="secondary">#586249</color>
     <color name="background">#121212</color>
     <color name="onBackground">#E0E0E0</color>
     <color name="surface">#1E1E1E</color>
@@ -15,8 +15,5 @@
     <color name="textSecondary">#B0BEC5</color>
     <color name="divider">#424242</color>
     <color name="colorSecondaryGreyLight">#B0BEC5</color>
-    <color name="accentColor">#FFC107</color>
-    <color name="earthBrown">#8D6E63</color>
-    <color name="skyBlue">#90CAF9</color>
-    <color name="sunsetOrange">#FF7043</color>
+    <color name="accentColor">#A0D0CB</color>
 </resources>

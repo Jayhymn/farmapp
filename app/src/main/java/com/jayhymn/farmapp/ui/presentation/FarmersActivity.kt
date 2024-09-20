@@ -11,8 +11,6 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
-import androidx.core.splashscreen.SplashScreen
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
@@ -24,7 +22,6 @@ import com.jayhymn.farmapp.databinding.ActivityFarmerBinding
 import com.jayhymn.farmapp.ui.state.FarmersUiState
 import com.jayhymn.farmapp.ui.viewmodels.FarmersViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -44,7 +41,7 @@ class FarmersActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.createProfile.setOnClickListener {
-            val intent = Intent(this, FarmRegistration::class.java)
+            val intent = Intent(this, FarmRegistrationActivity::class.java)
             startActivity(intent)
         }
 
@@ -91,6 +88,9 @@ class FarmersActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
+                    if (uiState.farmers.isEmpty()){
+                        binding.noRecord.visibility = View.VISIBLE
+                    }
                     handleErrors(uiState)
                     // Update other UI elements based on uiState
                 }

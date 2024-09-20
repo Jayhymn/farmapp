@@ -9,4 +9,9 @@
     <string name="gender_format">Gender: %1$s</string>
     <string name="phone_format">Phone: %1$s</string>
     <string name="crop_type_format">Crop Type: %1$s</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="choose_crop_type">Choose Crop Type</string>
+    <string name="crop_type">Crop Type</string>
 </resources>
