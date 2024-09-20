@@ -6,7 +6,6 @@ data class Farmer(
     val id: Int,
     val firstName: String,
     val lastName: String,
-    val gender: String,
     val phoneNumber: String,
     val cropType: String,
 ) {
@@ -15,7 +14,6 @@ data class Farmer(
             id = this.id,
             name = "${this.firstName} ${this.lastName}",
             cropType = this.cropType,
-            gender = this.gender,
             phoneNumber = this.phoneNumber
         )
     }

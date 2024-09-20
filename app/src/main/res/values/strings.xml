@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">FarmApp</string>
     <string name="retry">retry</string>
-    <string name="load_error">error\n</string>
+    <string name="load_error">Could not load data</string>
     <string name="no_records_found">No records found</string>
     <string name="register_farmer">Register Farmer</string>
     <string name="registration_title">Register Farmer</string>
     <string name="age_format">Age: %1$d</string>
-    <string name="gender_format">Gender: %1$s</string>
     <string name="phone_format">Phone: %1$s</string>
     <string name="crop_type_format">Crop Type: %1$s</string>
     <string name="first_name">First Name</string>
@@ -14,4 +13,7 @@
     <string name="phone_number">Phone Number</string>
     <string name="choose_crop_type">Choose Crop Type</string>
     <string name="crop_type">Crop Type</string>
+    <string name="success_message">Record Created Successfully</string>
+    <string name="already_exist_message">Phone number already exist</string>
+    <string name="error_message">Can\'t create record, Please try again</string>
 </resources>

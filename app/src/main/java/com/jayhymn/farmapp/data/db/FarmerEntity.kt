@@ -8,7 +8,8 @@ import com.jayhymn.farmapp.utils.DateUtils
 
 @Entity(tableName = "Farmers")
 data class FarmerEntity(
-    @PrimaryKey val uid: Int,
+    @PrimaryKey(autoGenerate = true)
+    val uid: Int = 0,
     @ColumnInfo(name = "first_name")
     val firstName: String?,
 
@@ -17,9 +18,6 @@ data class FarmerEntity(
 
     @ColumnInfo(name = "crop_type")
     val cropType: String?,
-
-    @ColumnInfo(name = "gender")
-    val gender: String?,
 
     @ColumnInfo(name = "phone_number")
     val phoneNumber: String?,
@@ -36,8 +34,7 @@ data class FarmerEntity(
             firstName = this.firstName ?: "",
             lastName = this.lastName ?: "",
             cropType = this.cropType ?: "",
-            gender = this.gender ?: "",
             phoneNumber = this.phoneNumber ?: "",
-        )
+            )
     }
 }

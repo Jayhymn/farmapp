@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.snackbar.Snackbar
 import com.jayhymn.farmapp.CropList
 import com.jayhymn.farmapp.R
 import com.jayhymn.farmapp.databinding.ActivityFarmRegistrationBinding
@@ -42,32 +43,33 @@ class FarmRegistrationActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.validationErrors.collect { errors ->
-                    // Clear previous errors for all fields
+                viewModel.state.collect { state ->
+                    // Clear previous errors
                     binding.inputLayoutFarmerFirstName.error = null
                     binding.inputLayoutFarmerLastName.error = null
                     binding.inputLayoutFarmerPhone.error = null
                     binding.inputLayoutCropType.error = null
 
-                    // Loop through errors and apply them to the corresponding fields
-                    errors.forEach { error ->
+                    // Handle validation errors
+                    state.validationErrors.forEach { error ->
                         if (error is ValidationResult.Error) {
-                            when(error.inputField) {
-                                InputField.FIRST_NAME -> {
-                                    binding.inputLayoutFarmerFirstName.error = error.errorMessage
-                                }
-                                InputField.LAST_NAME -> {
-                                    binding.inputLayoutFarmerLastName.error = error.errorMessage
-                                }
-                                InputField.PHONE_NUMBER -> {
-                                    binding.inputLayoutFarmerPhone.error = error.errorMessage
-                                }
-                                InputField.CROP_TYPE -> {
-                                    binding.inputLayoutCropType.error = error.errorMessage
-                                }
+                            when (error.inputField) {
+                                InputField.FIRST_NAME -> binding.inputLayoutFarmerFirstName.error = error.errorMessage
+                                InputField.LAST_NAME -> binding.inputLayoutFarmerLastName.error = error.errorMessage
+                                InputField.PHONE_NUMBER -> binding.inputLayoutFarmerPhone.error = error.errorMessage
+                                InputField.CROP_TYPE -> binding.inputLayoutCropType.error = error.errorMessage
                             }
                         }
                     }
+
+                    // Display success message
+                    state.successMessage?.getContentIfNotHandled()?.let { showSnackbar(it) }
+                    if (state.successMessage != null) {
+                        finish()
+                    }
+
+                    // Display error message
+                    state.error?.getContentIfNotHandled()?.let { showSnackbar(it) }
                 }
             }
         }
@@ -79,5 +81,9 @@ class FarmRegistrationActivity : AppCompatActivity() {
         // this can be used if the list is large. so it searches after the first 3 characters
         binding.editTextCropType.threshold = 1
         binding.editTextCropType.setAdapter(adapter)
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

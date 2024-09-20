@@ -17,13 +17,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_farmer_gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Gender: Male"
-        android:textSize="16sp" />
-
-    <TextView
         android:id="@+id/tv_farmer_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

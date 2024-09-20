@@ -8,7 +8,9 @@ import com.jayhymn.farmapp.data.Farmer
 import com.jayhymn.farmapp.databinding.FarmerRecordItemBinding
 import com.jayhymn.farmapp.ui.state.FarmerItemUiState
 
-class FarmerAdapter(private val farmerList: List<FarmerItemUiState>) :
+class FarmerAdapter(
+    private var farmerList: List<FarmerItemUiState>
+) :
     RecyclerView.Adapter<FarmerAdapter.FarmerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FarmerViewHolder {
@@ -21,12 +23,17 @@ class FarmerAdapter(private val farmerList: List<FarmerItemUiState>) :
         holder.bind(farmer)
     }
 
+    fun updateList(newFarmers: List<FarmerItemUiState>) {
+        farmerList = newFarmers
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = farmerList.size
 
     inner class FarmerViewHolder(private val binding: FarmerRecordItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(farmer: FarmerItemUiState) {
             binding.tvFarmerName.text = farmer.name
-            binding.tvFarmerGender.text = binding.root.context.getString(R.string.gender_format, farmer.gender)
+//            binding.tvFarmerGender.text = binding.root.context.getString(R.string.gender_format, farmer.gender)
             binding.tvFarmerPhone.text = binding.root.context.getString(R.string.phone_format, farmer.phoneNumber)
             binding.tvCropType.text = binding.root.context.getString(R.string.crop_type_format, farmer.cropType)
         }

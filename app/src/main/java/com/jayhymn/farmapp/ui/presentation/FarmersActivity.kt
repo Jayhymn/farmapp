@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jayhymn.farmapp.R
 import com.jayhymn.farmapp.databinding.ActivityFarmerBinding
@@ -28,6 +29,7 @@ import kotlinx.coroutines.launch
 class FarmersActivity : AppCompatActivity() {
     private val viewModel by viewModels<FarmersViewModel>()
     private lateinit var binding: ActivityFarmerBinding
+    private lateinit var adapter: FarmerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +47,23 @@ class FarmersActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        handleWindowInsets()
+        adapter = FarmerAdapter(emptyList())
+        binding.farmerList.adapter = adapter
+        binding.farmerList.layoutManager = LinearLayoutManager(this)
+
+//        handleWindowInsets()
 
         observeUiState()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchFarmers()
+    }
+
+
     private fun handleWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.sellout_list)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.farmer_list)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -88,9 +100,12 @@ class FarmersActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
-                    if (uiState.farmers.isEmpty()){
-                        binding.noRecord.visibility = View.VISIBLE
+                    binding.noRecord.visibility = if (uiState.farmers.isEmpty()) View.VISIBLE else View.GONE
+
+                    if (uiState.farmers.isNotEmpty()){
+                        adapter.updateList(uiState.farmers)
                     }
+
                     handleErrors(uiState)
                     // Update other UI elements based on uiState
                 }

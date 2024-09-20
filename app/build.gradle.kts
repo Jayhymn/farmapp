@@ -61,6 +61,16 @@ dependencies {
 
     implementation(libs.androidx.core.splashscreen)
 
+    // For JUnit
+    testImplementation(libs.junit)
+
+// For Mockito
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.mockito.inline)
+
+// For Coroutine testing
+    testImplementation (libs.kotlinx.coroutines.test)
+
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)

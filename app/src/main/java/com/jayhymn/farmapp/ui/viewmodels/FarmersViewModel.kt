@@ -1,5 +1,6 @@
 package com.jayhymn.farmapp.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.jayhymn.farmapp.data.repositories.FarmersRepository
 import com.jayhymn.farmapp.ui.state.FarmersUiState
@@ -19,47 +20,30 @@ import javax.inject.Inject
 @HiltViewModel
 class FarmersViewModel @Inject constructor(
     private val farmersRepo: FarmersRepository,
-    private val formatDateUseCase: FormatDateUseCase,
+//    private val formatDateUseCase: FormatDateUseCase,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(FarmersUiState())
     val uiState = _uiState.asStateFlow()
 
     private var fetchJob: Job? = null
 
-    fun createFarmer(firstName: String,
-                     lastName: String,
-                     cropType: String
-    ){
-        viewModelScope.launch {
-            try {
-                farmersRepo.createFarmer(firstName, lastName, cropType)
-            } catch (io: IOException){
-
-            }
-        }
-    }
 
     fun fetchFarmers(){
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch{
             try {
-                val farmers = farmersRepo.getFarmerRecords()
-                _uiState.update { state ->
-//                    when(farmers){
-//                        is Result.Success -> {
-//                            it.copy(farmers = result, isLoading = false)
-//                        }
-//                        is Result.Error -> {
-//                            val errorMessages = it.errorMessages + R.string.load_error
-//                            it.copy(errorMessages = errorMessages, isLoading = false)
-//                        }
-//                    }
+                _uiState.update{ it.copy(isLoading = true) }
 
-                    // this maps the farmer model data to what will be the uiState
+                val farmers = farmersRepo.getFarmerRecords()
+                Log.d("FarmersViewModel", "fetchFarmers: $farmers")
+                _uiState.update { state ->
+                    // this maps the farmer model data to what will be in the uiState
                     state.copy(farmers = farmers.map { it.toFarmerItemUiState() }, isLoading = false)
                 }
 
             } catch (io: IOException){
+                Log.e("FarmersViewModel", "Error fetching farmers", io)
+
                 _uiState.update {
                         it.copy(
                             errorMessages = it.errorMessages + R.string.load_error,
@@ -71,7 +55,14 @@ class FarmersViewModel @Inject constructor(
         }
     }
 
-    fun errorShown(errorId: Long){
 
+    fun errorShown(errorId: Int) {
+        _uiState.update { state ->
+            state.copy(errorMessages = state.errorMessages.filterNot { it == errorId })
+        }
+    }
+
+    init {
+        fetchFarmers()
     }
 }
