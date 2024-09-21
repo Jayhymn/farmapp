@@ -57,6 +57,7 @@ dependencies {
 
     // for dagger hilt
     implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
     androidTestImplementation (libs.hilt.android.testing)
     kaptAndroidTest (libs.hilt.compiler)
 

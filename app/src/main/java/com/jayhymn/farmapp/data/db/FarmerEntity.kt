@@ -35,6 +35,7 @@ data class FarmerEntity(
             lastName = this.lastName ?: "",
             cropType = this.cropType ?: "",
             phoneNumber = this.phoneNumber ?: "",
+            updatedAt = this.updatedAt ?: "",
             )
     }
 }

@@ -8,13 +8,15 @@ data class Farmer(
     val lastName: String,
     val phoneNumber: String,
     val cropType: String,
+    val updatedAt: String,
 ) {
     fun toFarmerItemUiState(): FarmerItemUiState {
         return FarmerItemUiState(
             id = this.id,
             name = "${this.firstName} ${this.lastName}",
             cropType = this.cropType,
-            phoneNumber = this.phoneNumber
+            phoneNumber = this.phoneNumber,
+            updatedAt = updatedAt
         )
     }
 }

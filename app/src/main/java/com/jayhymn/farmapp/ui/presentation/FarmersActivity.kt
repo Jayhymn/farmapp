@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.jayhymn.farmapp.R
 import com.jayhymn.farmapp.databinding.ActivityFarmerBinding
+import com.jayhymn.farmapp.domain.FormatDateUseCase
 import com.jayhymn.farmapp.ui.state.FarmersUiState
 import com.jayhymn.farmapp.ui.viewmodels.FarmersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,8 +31,9 @@ class FarmersActivity : AppCompatActivity() {
     private val viewModel by viewModels<FarmersViewModel>()
     lateinit var binding: ActivityFarmerBinding
     private lateinit var adapter: FarmerAdapter
+    private val dateUseCase by lazy { FormatDateUseCase() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
@@ -39,7 +41,6 @@ class FarmersActivity : AppCompatActivity() {
         }
 
         binding = ActivityFarmerBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
         binding.createProfile.setOnClickListener {
@@ -47,7 +48,7 @@ class FarmersActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        adapter = FarmerAdapter(emptyList())
+        adapter = FarmerAdapter(emptyList(), dateUseCase)
         binding.farmerList.adapter = adapter
         binding.farmerList.layoutManager = LinearLayoutManager(this)
 

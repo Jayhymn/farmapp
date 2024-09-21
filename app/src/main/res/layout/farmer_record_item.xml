@@ -1,33 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tracking_details"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:layout_marginBottom="8dp"
-    android:clipToPadding="false">
-
-    <TextView
-        android:id="@+id/tv_farmer_name"
-        android:layout_width="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:paddingHorizontal="24dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true"
+    android:orientation="horizontal"
+    android:background="@color/surfaceVariant"
+    >
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="Farmer Name"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_weight="0.7"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvFarmerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="3dp"
+            android:textSize="18sp"
+            tools:text="Fred Amory Cole"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textAlignment="center"
+            android:backgroundTint="@color/bg_screen_color"
+            android:textColor="@color/onSurface"
+            android:layout_marginBottom="2dp"
+            />
+        <TextView
+            android:id="@+id/tvFarmerPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Phone 08145081945"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            />
+        <TextView
+            android:id="@+id/tvCropType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Crop type: Cassava"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/cost_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Updated: "
+                android:paddingVertical="2dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_secondary_variant"
+                android:textAlignment="textStart"
+                />
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_icon_background"
+                android:backgroundTint="#83848b"
+                />
 
-    <TextView
-        android:id="@+id/tv_farmer_phone"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/updated_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Sep 20,2023 11:38 PM"
+                android:paddingVertical="5dp"
+                android:paddingHorizontal="5dp"
+                android:textSize="12sp"
+                android:textAlignment="textStart"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="Phone: +1234567890"
-        android:textSize="16sp" />
+        android:layout_weight="0.3"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_account_circle"
+             />
 
-    <TextView
-        android:id="@+id/tv_crop_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Crop Type: Wheat"
-        android:textSize="16sp" />
-
+    </FrameLayout>
 </LinearLayout>

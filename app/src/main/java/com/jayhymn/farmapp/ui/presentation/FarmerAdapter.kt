@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jayhymn.farmapp.R
 import com.jayhymn.farmapp.data.Farmer
 import com.jayhymn.farmapp.databinding.FarmerRecordItemBinding
+import com.jayhymn.farmapp.domain.FormatDateUseCase
 import com.jayhymn.farmapp.ui.state.FarmerItemUiState
 
 class FarmerAdapter(
-    private var farmerList: List<FarmerItemUiState>
+    private var farmerList: List<FarmerItemUiState>,
+    private val dateUseCase: FormatDateUseCase,
 ) :
     RecyclerView.Adapter<FarmerAdapter.FarmerViewHolder>() {
 
@@ -36,6 +38,7 @@ class FarmerAdapter(
 //            binding.tvFarmerGender.text = binding.root.context.getString(R.string.gender_format, farmer.gender)
             binding.tvFarmerPhone.text = binding.root.context.getString(R.string.phone_format, farmer.phoneNumber)
             binding.tvCropType.text = binding.root.context.getString(R.string.crop_type_format, farmer.cropType)
+            binding.updatedAt.text = dateUseCase(farmer.updatedAt)
         }
     }
 }

@@ -4,5 +4,6 @@ data class FarmerItemUiState(
     val id: Int,
     val name: String,
     val phoneNumber: String,
-    val cropType: String
+    val cropType: String,
+    val updatedAt: String,
 )

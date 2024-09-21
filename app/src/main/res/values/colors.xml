@@ -7,13 +7,22 @@
     <color name="secondary">#BFCBAD</color>
     <color name="background">#FFF</color>
     <color name="onBackground">#3C3C3C</color>
-    <color name="surface">#FFFFFF</color>
+    <color name="surface">#F8F8F8</color>
+    <color name="surfaceVariant">#FFFFFF</color>
     <color name="onSurface">#3C3C3C</color>
     <color name="onPrimary">#FFFFFF</color>
+    <color name="header_bg">#FBFBFB</color>
+    <color name="header_variant_bg">#FCFCFC</color>
     <color name="onSecondary">#2A331E</color>
     <color name="textPrimary">#4E4E4E</color>
     <color name="textSecondary">#757575</color>
     <color name="divider">#BDBDBD</color>
     <color name="colorSecondaryGreyLight">#B0BEC5</color>
+    <color name="grey_out">#B0BEC5</color>
+    <color name="light_grey">#D3D3D3</color>
     <color name="accentColor">#386663</color>
+    <color name="button_text_color">#FFFFFF</color>
+    <color name="textInputBorderColor">#FF0000</color>
+    <color name="bg_screen_color">#B3F2F2F4</color>
+    <color name="in_progress_color">#8be0bd</color>
 </resources>

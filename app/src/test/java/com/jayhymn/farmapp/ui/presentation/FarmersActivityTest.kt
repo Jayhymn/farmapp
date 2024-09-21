@@ -3,9 +3,8 @@ package com.jayhymn.farmapp.ui.presentation
 import android.content.Intent
 import android.view.View
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.jayhymn.farmapp.R
 import com.jayhymn.farmapp.ui.state.FarmersUiState
 import com.jayhymn.farmapp.ui.viewmodels.FarmersViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,10 +14,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import com.jayhymn.farmapp.R
 
+/** check why it doesn't run and shows Delegate runner couldn't be found */
 
 @RunWith(AndroidJUnit4::class)
 class FarmersActivityTest {
