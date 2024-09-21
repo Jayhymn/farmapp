@@ -2,6 +2,7 @@ package com.jayhymn.farmapp.ui.presentation
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -27,6 +28,8 @@ class FarmRegistrationActivity : AppCompatActivity() {
         binding = ActivityFarmRegistrationBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        enableEdgeToEdge()
 
         setUpCropDropDown()
 

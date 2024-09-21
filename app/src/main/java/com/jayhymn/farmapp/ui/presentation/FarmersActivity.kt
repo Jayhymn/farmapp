@@ -41,6 +41,7 @@ class FarmersActivity : AppCompatActivity() {
         }
 
         binding = ActivityFarmerBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
 
         binding.createProfile.setOnClickListener {

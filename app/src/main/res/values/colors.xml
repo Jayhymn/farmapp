@@ -25,4 +25,5 @@
     <color name="textInputBorderColor">#FF0000</color>
     <color name="bg_screen_color">#B3F2F2F4</color>
     <color name="in_progress_color">#8be0bd</color>
+    <color name="input_border_color">#B0BEC5</color>
 </resources>
