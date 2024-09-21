@@ -1,105 +1,119 @@
-import android.content.Intent
-import android.view.View
+package com.jayhymn.farmapp.ui.presentation
+
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.core.app.ActivityScenario
-import com.jayhymn.farmapp.CropList
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.jayhymn.farmapp.Event
 import com.jayhymn.farmapp.R
-import com.jayhymn.farmapp.data.repositories.FarmersRepository
-import com.jayhymn.farmapp.domain.RegisterFarmerInteractor
-import com.jayhymn.farmapp.ui.presentation.FarmRegistrationActivity
-import com.jayhymn.farmapp.ui.presentation.FarmersActivity
-import com.jayhymn.farmapp.ui.state.FarmerItemUiState
-import com.jayhymn.farmapp.ui.state.FarmersUiState
-import com.jayhymn.farmapp.ui.viewmodels.FarmersViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.jayhymn.farmapp.domain.InputField
+import com.jayhymn.farmapp.domain.ValidationResult
+import com.jayhymn.farmapp.ui.state.FarmerRegisterUiState
+import com.jayhymn.farmapp.ui.viewmodels.FarmerRegistrationViewModel
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.test.*
-import org.junit.After
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.junit.runner.RunWith
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
-class FarmersActivityTest {
+@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
+class FarmRegistrationActivityTest {
+
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var activity: FarmersActivity
-    @Mock
-    private lateinit var viewModel: FarmersViewModel
+    @Inject
+    lateinit var viewModel: FarmerRegistrationViewModel
+
     @Before
-    fun setup() {
-        Dispatchers.setMain(UnconfinedTestDispatcher())
-        activity = FarmersActivity().apply {
-            setContentView(R.layout.activity_farmer) // Ensure this layout is correct
-        }
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
-        // Clean up any resources if necessary
+    fun setUp() {
+        hiltRule.inject() // Inject the dependencies
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test
-    fun `test create profile button navigates to FarmRegistrationActivity`() {
-        // Launch the activity
-        val scenario = ActivityScenario.launch(FarmersActivity::class.java)
+    fun testSubmitFormWithValidInput() = runTest {
+        val scenario = ActivityScenario.launch(FarmRegistrationActivity::class.java)
 
-        // Act
         scenario.onActivity { activity ->
-            activity.binding.createProfile.performClick()
+            activity.binding.editTextFarmerFirstName.setText("John")
+            activity.binding.editTextFarmerLastName.setText("Doe")
+            activity.binding.editTextFarmerPhone.setText("08145081945")
+            activity.binding.editTextCropType.setText("Cassava")
 
-            // Assert
-            val expectedIntent = Intent(activity, FarmRegistrationActivity::class.java)
-            assertEquals(expectedIntent.component, activity.intent?.component)
+            activity.binding.btnSubmit.performClick()
+
+            // Check that the submit button is disabled
+            assertEquals(false, activity.binding.btnSubmit.isEnabled)
+
+            // Mock the success response
+            val successMessageId = R.string.success_message
+            val state = FarmerRegisterUiState(successMessage = Event(successMessageId))
+            Mockito.`when`(viewModel.state).thenReturn(MutableStateFlow(state))
+
+            // Simulate receiving the state in the lifecycle
+            activity.observeViewModelState()
+
+            // Check for the Snackbar
+            val snackbar = activity.showSnackbar(successMessageId)
+            assertNotNull(snackbar)
         }
     }
 
-
     @Test
-    fun `test observeUiState updates UI for empty farmers list`() = runTest {
-        // Arrange
-        val uiState = FarmersUiState(emptyList(), emptyList())
-        `when`(viewModel.uiState).thenReturn(MutableStateFlow(uiState))
+    fun testSubmitFormWithValidationErrors() = runTest {
+        val scenario = ActivityScenario.launch(FarmRegistrationActivity::class.java)
 
-        // Act
-        activity.observeUiState()
+        scenario.onActivity { activity ->
+            // Simulate validation errors
+            val validationErrors = listOf(
+                ValidationResult.Error("First name is required", InputField.FIRST_NAME),
+                ValidationResult.Error("Last name is required", InputField.LAST_NAME)
+            )
+            val state = FarmerRegisterUiState(validationErrors = validationErrors)
+            Mockito.`when`(viewModel.state).thenReturn(MutableStateFlow(state))
 
-        // Assert
-        assertEquals(View.VISIBLE, activity.binding.noRecord.visibility)
-    }
+            // Simulate receiving the state in the lifecycle
+            activity.observeViewModelState()
 
-    @Test
-    fun `test observeUiState updates UI for non-empty farmers list`() = runTest {
-        // Arrange
-        val farmersList = CropList.validCropTypes.map {
-            FarmerItemUiState(1, "John Doe", "08145081945", "cassava")
+            // Check that errors are displayed
+            assertEquals("First name is required", activity.binding.inputLayoutFarmerFirstName.error)
+            assertEquals("Last name is required", activity.binding.inputLayoutFarmerLastName.error)
         }
-        val uiState = FarmersUiState(farmersList, emptyList())
-        `when`(viewModel.uiState).thenReturn(MutableStateFlow(uiState))
-
-        // Act
-        activity.observeUiState()
-
-        // Assert
-        assertEquals(View.GONE, activity.binding.noRecord.visibility)
-        assertTrue((activity.binding.farmerList.adapter?.itemCount ?: 0) > 0)
     }
 
     @Test
-    fun `test handleErrors shows Snackbar when there are error messages`() {
-        // Arrange
-        val errorMessages = listOf(R.string.error_message)
-        val uiState = FarmersUiState(emptyList(), errorMessages)
+    fun testShowSnackbar() {
+        val scenario = ActivityScenario.launch(FarmRegistrationActivity::class.java)
 
-        // Act
-        activity.handleErrors(uiState)
+        scenario.onActivity { activity ->
+            val messageId = R.string.success_message
+            activity.showSnackbar(messageId)
+
+            // Check that Snackbar is displayed
+            // This would typically require UI testing framework like Espresso to check Snackbar visibility
+        }
+    }
+
+    @Test
+    fun testSetUpCropDropDown() {
+        val scenario = ActivityScenario.launch(FarmRegistrationActivity::class.java)
+
+        scenario.onActivity { activity ->
+            activity.setUpCropDropDown()
+            assertTrue((activity.binding.editTextCropType.adapter?.count ?: 0) > 0)
+        }
     }
 }

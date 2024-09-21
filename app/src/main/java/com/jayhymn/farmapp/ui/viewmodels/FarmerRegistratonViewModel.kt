@@ -55,14 +55,14 @@ class FarmerRegistrationViewModel @Inject constructor (
 
                 _uiState.update {
                     if (record > 0) {
-                        it.copy(successMessage = Event(R.string.success_message.toString()), isLoading = false)
+                        it.copy(successMessage = Event(R.string.success_message), isLoading = false)
                     } else {
                         // If the phone number has been used before, it will ignore the operation and return 0 from the database
-                        it.copy(error = Event(R.string.already_exist_message.toString()), isLoading = false)
+                        it.copy(error = Event(R.string.already_exist_message), isLoading = false)
                     }
                 }
             } catch (io: IOException) {
-                _uiState.update { it.copy(error = Event(R.string.error_message.toString()), isLoading = false) }
+                _uiState.update { it.copy(error = Event(R.string.error_message), isLoading = false) }
             }
         }
     }

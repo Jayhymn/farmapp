@@ -1,6 +1,8 @@
 package com.jayhymn.farmapp.ui.presentation
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -16,12 +18,13 @@ import com.jayhymn.farmapp.domain.InputField
 import com.jayhymn.farmapp.domain.ValidationResult
 import com.jayhymn.farmapp.ui.viewmodels.FarmerRegistrationViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FarmRegistrationActivity : AppCompatActivity() {
     private val viewModel by viewModels<FarmerRegistrationViewModel>()
-    private lateinit var binding: ActivityFarmRegistrationBinding
+    lateinit var binding: ActivityFarmRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +39,25 @@ class FarmRegistrationActivity : AppCompatActivity() {
         binding.toolbarIcon.setOnClickListener { finish() }
 
         binding.btnSubmit.setOnClickListener {
+            // temporary disabled button so form isn't submitted more than once
+            binding.btnSubmit.isEnabled = false
+
             viewModel.onRegisterButtonClicked(
                 binding.editTextFarmerFirstName.text.toString(),
                 binding.editTextFarmerLastName.text.toString(),
                 binding.editTextFarmerPhone.text.toString(),
                 binding.editTextCropType.text.toString(),
             )
-        }
 
+            lifecycleScope.launch {
+                delay(2000) //enable after 2 seconds
+                binding.btnSubmit.isEnabled = true
+            }
+        }
+        observeViewModelState()
+    }
+
+    fun observeViewModelState(){
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
@@ -65,20 +79,17 @@ class FarmRegistrationActivity : AppCompatActivity() {
                         }
                     }
 
-                    // Display success message
-                    state.successMessage?.getContentIfNotHandled()?.let { showSnackbar(it) }
-                    if (state.successMessage != null) {
-                        finish()
-                    }
-
-                    // Display error message
-                    state.error?.getContentIfNotHandled()?.let { showSnackbar(it) }
+                    // Display error message and return to FarmerActivity
+                    state.successMessage?.getContentIfNotHandled()?.let { messageId ->
+                        showSnackbar(messageId)
+                        Handler(Looper.getMainLooper()).postDelayed({ finish() }, 1000)                    }
                 }
             }
         }
+
     }
 
-    private fun setUpCropDropDown(){
+    fun setUpCropDropDown(){
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, CropList.validCropTypes)
 
         // this can be used if the list is large. so it searches after the first 3 characters
@@ -88,7 +99,7 @@ class FarmRegistrationActivity : AppCompatActivity() {
         binding.editTextCropType.setDropDownBackgroundResource(R.color.surfaceVariant)
     }
 
-    private fun showSnackbar(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    fun showSnackbar(messageId: Int) {
+        Snackbar.make(binding.root, getString(messageId), Snackbar.LENGTH_SHORT).show()
     }
 }

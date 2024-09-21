@@ -46,9 +46,9 @@ The application includes unit tests to ensure the functionality of critical comp
    ```bash
    git clone https://github.com/jayhymn/farmapp.git
 
-### Screenshots
-```
 
-[Registration]: app/src/main/java/com/jayhymn/farmapp/ui/presentation/FarmRegistrationActivity.kt
-[HomeScreen]: app/src/main/java/com/jayhymn/farmapp/ui/presentation/FarmsActivity.kt
-[hilt]: https://d.android.com/hilt
+### Screenshots
+![SplashScreen](screenshots/SplashScreen.png)
+![Registration](screenshots/RegistrationScreen.png)
+![Home Screen](screenshots/HomeScreen.png)
+```

@@ -24,6 +24,7 @@
             android:paddingVertical="3dp"
             android:textSize="18sp"
             tools:text="Fred Amory Cole"
+            android:textAllCaps="true"
             android:gravity="center"
             android:fontFamily="sans-serif-condensed-medium"
             android:textAlignment="center"

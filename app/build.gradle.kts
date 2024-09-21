@@ -49,32 +49,45 @@ dependencies {
 
     // for room database
     implementation(libs.androidx.room.runtime)
+    implementation(libs.core.ktx)
     implementation(libs.androidx.junit.ktx)
-    testImplementation(libs.junit)
+    testImplementation(libs.testng)
+    testImplementation(libs.hilt.android.testing)
     annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
     // for dagger hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    androidTestImplementation (libs.hilt.android.testing)
-    kaptAndroidTest (libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
 
     implementation(libs.lottie)
 
     implementation(libs.androidx.core.splashscreen)
 
-    testImplementation (libs.mockito.core)
     testImplementation (libs.androidx.core.testing)
 
-// For Coroutine testing
+    // For Coroutine testing
     testImplementation (libs.kotlinx.coroutines.test)
 
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
+    //hilt testing
+    androidTestImplementation (libs.hilt.android.testing)
+    kaptAndroidTest (libs.hilt.compiler)
+    
+    // JUnit 5
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.3")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.3")
+
+    // Mockito for mocking
+    androidTestImplementation("org.mockito:mockito-core:5.0.0")
+    testImplementation("org.mockito:mockito-junit-jupiter:5.0.0") // For JUnit 5 support
+
+    // AndroidX Test - UI Testing
+    androidTestImplementation("androidx.test:runner:1.5.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.arch.core:core-testing:2.1.0")
 }

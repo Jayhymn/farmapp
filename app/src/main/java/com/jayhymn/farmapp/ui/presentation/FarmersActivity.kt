@@ -53,23 +53,12 @@ class FarmersActivity : AppCompatActivity() {
         binding.farmerList.adapter = adapter
         binding.farmerList.layoutManager = LinearLayoutManager(this)
 
-//        handleWindowInsets()
-
         observeUiState()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.fetchFarmers()
-    }
-
-
-    private fun handleWindowInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.farmer_list)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -103,6 +92,7 @@ class FarmersActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     binding.noRecord.visibility = if (uiState.farmers.isEmpty()) View.VISIBLE else View.GONE
+                    binding.farmerList.visibility = if (uiState.farmers.isEmpty()) View.GONE else View.VISIBLE
 
                     if (uiState.farmers.isNotEmpty()){
                         adapter.updateList(uiState.farmers)
