@@ -52,9 +52,11 @@ The application includes unit tests to ensure the functionality of critical comp
 ![SplashScreen](screenshots/SplashScreen.png)
 ![Registration](screenshots/RegistrationScreen.png)
 ![Home Screen](screenshots/HomeScreen.png)
+![Validation Screen](screenshots/Validation.png)
 
 ### Dark Mode
 ![SplashScreen](screenshots/SplashScreenDark.png)
 ![Registration](screenshots/RegistrationScreenDark.png)
 ![Home Screen](screenshots/HomeScreenDark.png)
+![Validation Screen](screenshots/ValidationDark.png)
 ```
