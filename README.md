@@ -48,12 +48,12 @@ The application includes unit tests to ensure the functionality of critical comp
 
 
 ### Screenshots
-Light Mode
+### Light Mode
 ![SplashScreen](screenshots/SplashScreen.png)
 ![Registration](screenshots/RegistrationScreen.png)
 ![Home Screen](screenshots/HomeScreen.png)
 
-Light Mode
+### Dark Mode
 ![SplashScreen](screenshots/SplashScreenDark.png)
 ![Registration](screenshots/RegistrationScreenDark.png)
 ![Home Screen](screenshots/HomeScreenDark.png)
