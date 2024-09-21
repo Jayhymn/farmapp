@@ -84,6 +84,8 @@ class FarmRegistrationActivity : AppCompatActivity() {
         // this can be used if the list is large. so it searches after the first 3 characters
         binding.editTextCropType.threshold = 1
         binding.editTextCropType.setAdapter(adapter)
+
+        binding.editTextCropType.setDropDownBackgroundResource(R.color.surfaceVariant)
     }
 
     private fun showSnackbar(message: String) {

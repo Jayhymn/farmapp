@@ -2,13 +2,13 @@
 <resources>
     <color name="app_bar_color">#FBFBFB</color>
     <color name="primaryLight">#A8E6CE</color>
-    <color name="primary">#4CAF50</color>
+    <color name="primary">#81C784</color>
     <color name="primaryVariant">#388E3C</color>
     <color name="secondary">#BFCBAD</color>
     <color name="background">#FFF</color>
     <color name="onBackground">#3C3C3C</color>
-    <color name="surface">#F8F8F8</color>
-    <color name="surfaceVariant">#FFFFFF</color>
+    <color name="surface">#F5F5F5</color>
+    <color name="surfaceVariant">#FDFDFD</color>
     <color name="onSurface">#3C3C3C</color>
     <color name="onPrimary">#FFFFFF</color>
     <color name="header_bg">#FBFBFB</color>

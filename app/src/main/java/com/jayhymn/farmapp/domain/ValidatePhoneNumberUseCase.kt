@@ -20,7 +20,7 @@ class ValidatePhoneNumberUseCase {
             sanitizedPhone.length == 11 && sanitizedPhone.startsWith("0") -> {
                 ValidationResult.Success
             }
-            sanitizedPhone.length == 10 -> {
+            sanitizedPhone.length == 10 && !sanitizedPhone.startsWith("0") -> {
                 ValidationResult.Success
             }
             else -> {

@@ -20,7 +20,7 @@
             android:id="@+id/layout_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/header_bg"
+            android:background="@color/surface"
             >
 
             <androidx.cardview.widget.CardView
@@ -33,7 +33,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/header_variant_bg"
+                    android:background="@color/header_bg"
                     android:paddingVertical="14dp">
 
                     <TextView
@@ -43,7 +43,7 @@
                         android:textAllCaps="true"
                         android:text="@string/registration_title"
                         android:textSize="16sp"
-                        android:textColor="@color/onSurface"
+                        android:textColor="@color/primary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/toolbar_icon"
@@ -70,8 +70,9 @@
         <LinearLayout
             android:id="@+id/layout_farmer_registration"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@color/surfaceVariant"
             android:padding="16dp">
 
             <TextView
@@ -85,7 +86,6 @@
                 android:layout_marginTop="24dp"
                 android:textStyle="bold"
                 android:textSize="14sp"
-                android:textColor="@color/accentColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginBottom="24dp"
@@ -112,7 +112,7 @@
                     android:inputType="textPersonName|textCapSentences"
                     android:drawablePadding="8dp"
                     android:drawableStart="@drawable/ic_person"
-                    app:drawableTint="@color/accentColor"
+                    app:drawableTint="@color/primaryVariant"
                     android:maxLength="20"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -136,7 +136,7 @@
                     android:inputType="textPersonName|textCapSentences"
                     android:drawablePadding="8dp"
                     android:drawableStart="@drawable/ic_person"
-                    app:drawableTint="@color/accentColor"
+                    app:drawableTint="@color/primaryVariant"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,7 +160,7 @@
                     android:maxLength="14"
                     android:drawableStart="@drawable/ic_phone"
                     android:drawablePadding="8dp"
-                    app:drawableTint="@color/accentColor"
+                    app:drawableTint="@color/primaryVariant"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,7 +186,7 @@
                     android:padding="16dp"
                     android:maxLength="14"
                     android:drawableStart="@drawable/ic_plant"
-                    app:drawableTint="@color/accentColor"
+                    app:drawableTint="@color/primaryVariant"
                     android:drawablePadding="8dp"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -207,6 +207,8 @@
         android:text="submit"
         android:textSize="16sp"
         app:cornerRadius="12dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/primary"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
